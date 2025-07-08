@@ -24,15 +24,15 @@ RUN echo '"typesearch":"webapi","merge":null' > /home/module/JacRed.conf
 
 RUN echo '[{"enable":true,"dll":"Online.dll"}, {"enable":false,"dll":"SISI.dll"},   {"enable":true,"dll":"DLNA.dll"},   {"enable":false,"initspace":"Jackett.ModInit","dll":"JacRed.dll"},  {"enable":false,"initspace":"TorrServer.ModInit","dll":"TorrServer.dll"},   {"enable":true,"initspace":"Tracks.ModInit","dll":"Tracks.dll"},    {"enable":true,"dll":"Merchant.dll"}  ]' > /home/module/manifest.json
 
-
 ARG GITHUB_TOKEN
-# Завантажуємо приватний файл init.conf, як COPY
+
 RUN curl -sSL -H "Authorization: token ${GITHUB_TOKEN}" \
-     https://raw.githubusercontent.com/lilllilililllililil/My-Init.conf-to-Lampac/main/init.conf \
-     -o /home/init.conf
+    https://raw.githubusercontent.com/lilllilililllililil/My-Init.conf-to-Lampac/main/init.conf \
+    -o /tmp/init.conf
 
+RUN cp /tmp/init.conf /home/init.conf
 
-
+RUN rm /tmp/init.conf
 
     
 RUN mkdir -p torrserver && curl -L -k -o torrserver/TorrServer-linux https://github.com/YouROK/TorrServer/releases/latest/download/TorrServer-linux-amd64 \
