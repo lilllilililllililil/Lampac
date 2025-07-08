@@ -26,9 +26,11 @@ RUN echo '[{"enable":true,"dll":"Online.dll"}, {"enable":false,"dll":"SISI.dll"}
 
 
 ARG GITHUB_TOKEN
-RUN curl -H "Authorization: token ${GITHUB_TOKEN}" \
-     -L -o /home/init.conf \
-     https://raw.githubusercontent.com/lilllilililllililil/My-Init.conf-to-Lampac/main/init.conf
+# Завантажуємо приватний файл init.conf, як COPY
+RUN curl -sSL -H "Authorization: token ${GITHUB_TOKEN}" \
+     https://raw.githubusercontent.com/lilllilililllililil/My-Init.conf-to-Lampac/main/init.conf \
+     -o /home/init.conf
+
 
 
 
